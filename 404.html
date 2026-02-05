@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Stackly Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #5a67d8;
+            --primary-dark: #4c51bf;
+            --secondary: #f56565;
+            --accent: #ed8936;
+            --accent-light: #f6ad55;
+            --dark: #2d3748;
+            --darker: #1a202c;
+            --light: #f7fafc;
+            --text: #4a5568;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --glow: 0 0 15px rgba(237, 137, 54, 0.7);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            background-color: rgba(255, 255, 255, 0.98);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .logo span {
+            color: var(--dark);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-left: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .nav-menu a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover:after {
+            width: 100%;
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* 404 Page Content */
+        .error-page {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .error-container {
+            text-align: center;
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .error-code {
+            font-size: 15rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(90, 103, 216, 0.3);
+            position: relative;
+            display: inline-block;
+            animation: pulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        .error-code:before {
+            content: '404';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            z-index: -1;
+            filter: blur(15px);
+            opacity: 0.7;
+        }
+
+        .error-title {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .error-message {
+            font-size: 1.2rem;
+            color: #cbd5e0;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        /* Error Robot Animation */
+        .error-robot {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .robot-body {
+            width: 180px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 20px;
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: var(--shadow);
+            animation: robotFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes robotFloat {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-15px); }
+        }
+
+        .robot-head {
+            width: 120px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 20px 20px 0 0;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .robot-face {
+            width: 70px;
+            height: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .robot-eye {
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            position: relative;
+            animation: robotBlink 3s infinite;
+        }
+
+        @keyframes robotBlink {
+            0%, 45%, 55%, 100% { height: 20px; }
+            50% { height: 5px; }
+        }
+
+        .robot-eye:before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            top: 4px;
+            left: 4px;
+        }
+
+        .robot-antenna {
+            width: 8px;
+            height: 30px;
+            background: var(--accent);
+            border-radius: 4px;
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .robot-antenna:before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: var(--secondary);
+            border-radius: 50%;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: antennaGlow 2s infinite alternate;
+        }
+
+        @keyframes antennaGlow {
+            0% { box-shadow: 0 0 5px var(--secondary); }
+            100% { box-shadow: 0 0 20px var(--secondary), 0 0 30px var(--secondary); }
+        }
+
+        .robot-arm {
+            position: absolute;
+            width: 20px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 10px;
+            top: 80px;
+        }
+
+        .robot-arm.left {
+            left: -25px;
+            transform-origin: top right;
+            animation: armWaveLeft 3s infinite alternate;
+        }
+
+        .robot-arm.right {
+            right: -25px;
+            transform-origin: top left;
+            animation: armWaveRight 3s infinite alternate;
+        }
+
+        @keyframes armWaveLeft {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-45deg); }
+        }
+
+        @keyframes armWaveRight {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(45deg); }
+        }
+
+        /* Action Buttons */
+        .error-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            gap: 10px;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-accent {
+            background: var(--accent);
+        }
+
+        .btn-accent:hover {
+            background: #dd6b20;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Search Box */
+        .search-box {
+            max-width: 500px;
+            margin: 40px auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 18px 20px 18px 50px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(237, 137, 54, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .search-input::placeholder {
+            color: #a0aec0;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* Anime Floating Elements */
+        .anime-float {
+            position: absolute;
+            opacity: 0.2;
+            z-index: 1;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(15deg); }
+        }
+
+        .anime-float:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation-delay: 0s;
+        }
+
+        .anime-float:nth-child(2) {
+            top: 20%;
+            right: 10%;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation-delay: 2s;
+        }
+
+        .anime-float:nth-child(3) {
+            bottom: 30%;
+            left: 15%;
+            width: 70px;
+            height: 70px;
+            background: var(--secondary);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            animation-delay: 4s;
+        }
+
+        .anime-float:nth-child(4) {
+            bottom: 20%;
+            right: 20%;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-light);
+            border-radius: 10px;
+            animation-delay: 6s;
+        }
+
+        /* Popular Links */
+        .popular-links {
+            margin-top: 60px;
+        }
+
+        .popular-links h3 {
+            color: white;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .link-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .link-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: var(--glow);
+        }
+
+        .link-card i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .link-card a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to bottom, #1a202c, #0f1419);
+            color: #cbd5e0;
+            padding: 40px 0 20px;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .error-code {
+                font-size: 12rem;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+            
+            .error-robot {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .robot-body {
+                width: 150px;
+                height: 170px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.4s ease;
+                z-index: 999;
+            }
+
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .nav-menu li {
+                margin: 15px 0;
+            }
+            
+            .error-page {
+                padding: 80px 0 40px;
+            }
+            
+            .error-code {
+                font-size: 9rem;
+            }
+            
+            .error-title {
+                font-size: 1.8rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .links-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .error-code {
+                font-size: 7rem;
+            }
+            
+            .error-title {
+                font-size: 1.5rem;
+            }
+            
+            .error-message {
+                font-size: 1rem;
+            }
+            
+            .error-robot {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .robot-body {
+                width: 120px;
+                height: 140px;
+            }
+            
+            .robot-head {
+                width: 90px;
+                height: 80px;
+            }
+            
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-robot"></i>
+                Stac<span>kly</span>
+            </a>
+            
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- 404 Page Content -->
+    <main class="error-page">
+        <!-- Background anime elements -->
+        <div class="anime-float"></div>
+        <div class="anime-float"></div>
+        <div class="anime-float"></div>
+        <div class="anime-float"></div>
+        
+        <div class="container">
+            <div class="error-container">
+                <!-- Animated Robot -->
+                <div class="error-robot">
+                    <div class="robot-antenna"></div>
+                    <div class="robot-head">
+                        <div class="robot-face">
+                            <div class="robot-eye"></div>
+                            <div class="robot-eye"></div>
+                        </div>
+                    </div>
+                    <div class="robot-body">
+                        <div class="robot-arm left"></div>
+                        <div class="robot-arm right"></div>
+                    </div>
+                </div>
+                
+                <!-- Error Code -->
+                <div class="error-code">404</div>
+                
+                <!-- Error Message -->
+                <h1 class="error-title">Oops! Page Not Found</h1>
+                
+                <p class="error-message">
+                    The page you are looking for seems to have vanished into the digital void. 
+                    It might have been moved, deleted, or perhaps never existed in our server's memory banks.
+                </p>
+                
+                <!-- Search Box -->
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Search for solutions, services, or articles...">
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="error-actions">
+                    <a href="index.html" class="btn">
+                        <i class="fas fa-home"></i> Back to Home
+                    </a>
+                    <a href="index.html#services" class="btn btn-accent">
+                        <i class="fas fa-laptop-code"></i> Our Services
+                    </a>
+                    <a href="index.html#contact" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i> Contact Support
+                    </a>
+                </div>
+                
+                <!-- Popular Links -->
+                <div class="popular-links">
+                    <h3>Popular Pages You Might Be Looking For:</h3>
+                    <div class="links-grid">
+                        <div class="link-card">
+                            <i class="fas fa-laptop-code"></i>
+                            <a href="index.html#services">Software Development</a>
+                        </div>
+                        <div class="link-card">
+                            <i class="fas fa-cloud"></i>
+                            <a href="index.html#services">Cloud Solutions</a>
+                        </div>
+                        <div class="link-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <a href="index.html#services">Cybersecurity</a>
+                        </div>
+                        <div class="link-card">
+                            <i class="fas fa-briefcase"></i>
+                            <a href="index.html#portfolio">Our Portfolio</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <p>&copy; 2023 Stackly Solutions. All rights reserved. | Designed with <i class="fas fa-heart" style="color: var(--secondary);"></i> and anime inspiration</p>
+                <p style="margin-top: 10px;">Error 404 - Page Not Found</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileToggle.querySelector('i').classList.toggle('fa-bars');
+            mobileToggle.querySelector('i').classList.toggle('fa-times');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileToggle.querySelector('i').classList.add('fa-bars');
+                mobileToggle.querySelector('i').classList.remove('fa-times');
+            });
+        });
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const query = searchInput.value.trim();
+                if (query) {
+                    alert(`Searching for: "${query}"\n\nIn a real application, this would redirect to search results.`);
+                    // In a real app: window.location.href = `/search?q=${encodeURIComponent(query)}`;
+                }
+            }
+        });
+        
+        // Robot interaction
+        const robot = document.querySelector('.error-robot');
+        robot.addEventListener('click', () => {
+            const robotBody = document.querySelector('.robot-body');
+            robotBody.style.animation = 'none';
+            robotBody.style.transform = 'translateX(-50%) scale(1.1)';
+            
+            setTimeout(() => {
+                robotBody.style.animation = 'robotFloat 4s ease-in-out infinite';
+                robotBody.style.transform = 'translateX(-50%) scale(1)';
+            }, 500);
+            
+            // Show message
+            const messages = [
+                "Beep boop! Page not found!",
+                "Error 404 detected!",
+                "Let me help you find your way!",
+                "Digital void ahead!",
+                "Redirecting to safety..."
+            ];
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            alert(`🤖 Robot Assistant: ${randomMsg}`);
+        });
+        
+        // Add floating effect to link cards
+        const linkCards = document.querySelectorAll('.link-card');
+        linkCards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.2}s`;
+        });
+        
+        // Error code glow effect
+        const errorCode = document.querySelector('.error-code');
+        setInterval(() => {
+            errorCode.style.textShadow = `0 0 ${20 + Math.random() * 20}px rgba(90, 103, 216, 0.5)`;
+        }, 2000);
+    </script>
+</body>
+</html>
